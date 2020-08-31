@@ -73,7 +73,7 @@ assert.strictEqual(api.b.subdir.myNumber, myNumber);
 * `keyword` (default `'recursive'`) Allows the keyword which triggers the recursive loader to be changed.
 
 `File` objects have the following properties:
-* `type` The type of the object. One of `file` or `directory`. (Symlinks are not yet supported, sorry.)
+* `type` The type of the object. One of `'file'` or `'directory'`. (Symlinks are not yet supported, sorry.)
 * `basename` The basename of the file.
 * `path` The root-relative path of the file.
 * `absPath` The absolute path of the file.
