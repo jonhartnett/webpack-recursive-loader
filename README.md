@@ -10,12 +10,14 @@ npm install -D webpack-recursive-loader
 ```
 
 ### Usage
-Given a directory structure like
-|- api
+Given a directory structure like  
+```
+|- api 
 |  |- a.js
-|  |- subdir
-|     |- b.js
+|  |- subdir  
+|     |- b.js  
 |- index.js
+```
 
 ```js
 //webpack.config.js
