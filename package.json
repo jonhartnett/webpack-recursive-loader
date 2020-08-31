@@ -1,0 +1,34 @@
+{
+    "name": "webpack-recursive-loader",
+    "version": "1.0.0",
+    "description": "Webpack recursive importing loader",
+    "license": "MIT",
+    "repository": "github:jonhartnett/webpack-recursive-loader",
+    "author": {
+        "name": "Jonathan Hartnett"
+    },
+    "main": "dist/index.js",
+    "module": "src/index.js",
+    "scripts": {
+        "watch": "babel src --out-dir dist --source-maps --watch",
+        "build": "babel src --out-dir dist --source-maps"
+    },
+    "dependencies": {
+        "@babel/generator": "^7.11.4",
+        "@babel/types": "^7.11.0",
+        "loader-utils": "^2.0.0",
+        "miniglob": "^0.1.1"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.10.5",
+        "@babel/core": "^7.11.1",
+        "@babel/plugin-proposal-function-bind": "^7.10.5",
+        "@babel/plugin-proposal-unicode-property-regex": "^7.10.4",
+        "@babel/preset-env": "^7.11.0"
+    },
+    "files": [
+        "/dist/**/*",
+        "/null"
+    ],
+    "sideEffects": false
+}
