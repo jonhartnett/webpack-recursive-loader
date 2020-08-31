@@ -4,6 +4,7 @@ module.exports = {
     ],
     plugins: [
         require('@babel/plugin-proposal-function-bind'),
-        require('@babel/plugin-proposal-unicode-property-regex')
+        require('@babel/plugin-proposal-unicode-property-regex'),
+        require('@babel/plugin-transform-runtime')
     ]
 };

@@ -20,7 +20,9 @@ export function defaultGetFileName({ basename, path, absPath, type }){
 
 export function normalizeFilePattern(pattern, fallback){
     function* unpack(pattern){
-        if(typeof pattern === 'string'){
+        if(pattern == null){
+            //yield nothing
+        }else if(typeof pattern === 'string'){
             yield function(file){
                 if(globMatch(pattern, '/' + file.path))
                     return true;
@@ -138,5 +140,4 @@ export class WebpackRecursiveLoaderPlugin {
         });
     }
 }
-
 WebpackRecursiveLoaderPlugin.prototype._getNameForFile = cacheDecorator(file => `${file.type},${file.path}`)(WebpackRecursiveLoaderPlugin.prototype._getNameForFile);

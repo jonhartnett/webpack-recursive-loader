@@ -72,10 +72,10 @@ export function WebpackRecursiveLoader(source){
         }
 
         //export all the keys
-        if(keys.length > 0){
+        if(keys.size > 0){
             body.push(
                 t.exportNamedDeclaration(null, [
-                    ...keys::map(key => {
+                    ...keys.keys()::map(key => {
                         key = t.identifier(key);
                         return t.exportSpecifier(key, key);
                     })
