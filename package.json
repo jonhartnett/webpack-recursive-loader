@@ -1,6 +1,6 @@
 {
     "name": "webpack-recursive-loader",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Webpack recursive importing loader",
     "license": "MIT",
     "repository": "github:jonhartnett/webpack-recursive-loader",

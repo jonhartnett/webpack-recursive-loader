@@ -5,7 +5,7 @@ import { map, toQueryString } from './util';
 import Path from 'path';
 import {promisify} from 'util';
 
-export function WebpackRecursiveLoader(source){
+export default function WebpackRecursiveLoader(source){
     let {
         fileSystem=this.fs,
         plugin,

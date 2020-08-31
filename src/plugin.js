@@ -60,7 +60,7 @@ export function normalizeFilePattern(pattern, fallback){
 }
 
 export class WebpackRecursiveLoaderPlugin {
-    constructor({ keyword='recursive', namespace=null, include=null, exclude=null, getName=defaultGetFileName }={}) {
+    constructor({ keyword='recursive', namespace=null, include=null, exclude=null, getName=defaultGetFileName, suppressRemovedError=false }={}) {
         if(['fileSystem', 'plugin', 'namespace', 'root', 'path'].includes(keyword))
             throw new Error(`Invalid keyword: ${keyword}`);
         this.keyword = keyword;
@@ -68,6 +68,7 @@ export class WebpackRecursiveLoaderPlugin {
         this.include = normalizeFilePattern(include, true);
         this.exclude = normalizeFilePattern(exclude, false);
         this.getName = getName;
+        this.suppressRemovedError = suppressRemovedError;
     }
 
     get name(){
@@ -90,7 +91,7 @@ export class WebpackRecursiveLoaderPlugin {
     apply(compiler){
         compiler.hooks.normalModuleFactory.tap(this.name, normalModuleFactory => {
             let nullPath = require.resolve('../null');
-            let loaderPath = require.resolve('./index');
+            let loaderPath = require.resolve('./loader');
             let normalResolver = normalModuleFactory.getResolver('normal');
 
             normalModuleFactory.hooks.beforeResolve.tap({
@@ -108,7 +109,7 @@ export class WebpackRecursiveLoaderPlugin {
                     ...query,
                     path
                 });
-                data.request = `!!webpack-recursive-loader?${query}!${nullPath}`;
+                data.request = `!!${loaderPath}?${query}!${nullPath}`;
             });
             normalModuleFactory.hooks.afterResolve.tap(this.name, data => {
                 if(data.resource !== nullPath)
@@ -135,7 +136,8 @@ export class WebpackRecursiveLoaderPlugin {
                         return;
                     }
                 }
-                throw new Error(`Requested 'webpack-recursive-loader/null', but loader is missing!`);
+                if(!this.suppressRemovedError)
+                    throw new Error(`Requested 'webpack-recursive-loader/null', but loader is missing! Maybe the loader was removed by another plugin? If you meant to remove it, specify suppressRemovedError to suppress this error.`);
             });
         });
     }
