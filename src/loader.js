@@ -21,6 +21,8 @@ export default function WebpackRecursiveLoader(source){
     (async () => {
         let absDirPath = Path.join(root, dirPath);
 
+        this.addContextDependency(absDirPath);
+
         let entries = await readDirAsync(absDirPath);
 
         //get stats for all entries
